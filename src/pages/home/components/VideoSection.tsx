@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import thumbnail from "../../../assets/vsl-thumbnail.png";
 
 export default function VideoSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -50,7 +51,11 @@ export default function VideoSection() {
             >
               {!isPlaying ? (
                 <>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,oklch(var(--primary-900)_/_0.2)_0%,transparent_60%)]" />
+                  <img
+  src={thumbnail}
+  alt="Video presentación MSFITNESS"
+  className="absolute inset-0 w-full h-full object-cover"
+/>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary-500/20 border border-primary-500/30 flex items-center justify-center group-hover:bg-primary-500/30 group-hover:scale-110 transition-all duration-300">
                       <i className="ri-play-fill text-primary-400 text-2xl md:text-3xl ml-1" />
