@@ -58,7 +58,7 @@ export default function VideoSection() {
 />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary-500/20 border border-primary-500/30 flex items-center justify-center group-hover:bg-primary-500/30 group-hover:scale-110 transition-all duration-300">
-                      <i className="ri-play-fill text-primary-400 text-2xl md:text-3xl ml-1" />
+                      <i className="ri-play-fill text-white text-2xl md:text-3xl ml-1" />
                     </div>
                   </div>
                   <div className="absolute bottom-4 left-4 right-4">
