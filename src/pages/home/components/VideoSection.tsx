@@ -80,16 +80,27 @@ export default function VideoSection() {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
 
-                  {/* Play Button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  {/* Play Button con resplandor azul */}
+<div className="absolute inset-0 flex items-center justify-center">
 
-                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary-500 border-4 border-white/30 flex items-center justify-center shadow-xl group-hover:bg-primary-600 group-hover:scale-110 transition-all duration-300">
+  <div className="relative flex items-center justify-center">
 
-                      <i className="ri-play-fill text-white text-3xl md:text-4xl ml-1" />
+    {/* Halo luminoso animado */}
+    <div className="absolute w-24 h-24 md:w-28 md:h-28 rounded-full bg-blue-500/40 blur-xl animate-pulse pointer-events-none" />
 
-                    </div>
+    {/* Resplandor exterior */}
+    <div className="absolute w-20 h-20 md:w-24 md:h-24 rounded-full shadow-[0_0_35px_12px_rgba(59,130,246,0.45)] pointer-events-none" />
 
-                  </div>
+    {/* Botón Play */}
+    <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary-500 border-4 border-white/30 flex items-center justify-center shadow-xl group-hover:bg-primary-600 group-hover:scale-110 transition-all duration-300">
+
+      <i className="ri-play-fill text-white text-3xl md:text-4xl ml-1" />
+
+    </div>
+
+  </div>
+
+</div>
 
                   {/* Video Info */}
                   <div className="absolute bottom-4 left-4 right-4">
