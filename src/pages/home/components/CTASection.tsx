@@ -38,16 +38,18 @@ export default function CTASection() {
         <div className="max-w-3xl mx-auto text-center">
           <div className="reveal opacity-0 translate-y-4 transition-all duration-700">
             <h2 className="font-heading font-bold text-foreground-50 text-3xl md:text-5xl lg:text-6xl uppercase tracking-wide leading-tight">
-              EL CAMBIO EMPIEZA CON UNA
-              <br />
-              <span className="text-blue-500">DECISIÓN</span>
-            </h2>
+  EL CAMBIO EMPIEZA
+  <br />
+  CON UNA <span className="text-blue-500">DECISIÓN</span>
+</h2>
+
           </div>
 
           <div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-200 mt-6">
             <p className="text-foreground-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-              Descubrí si ELITE 90 es para vos
-            </p>
+  Conversemos sobre tus objetivos y descubrí si ELITE 90
+  es el programa adecuado para vos.
+</p>
           </div>
 
           <div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-300 mt-10">
@@ -64,8 +66,8 @@ export default function CTASection() {
               <i className="ri-arrow-right-up-line text-foreground-400 text-lg group-hover:text-foreground-50 transition-colors" />
             </button>
             <p className="mt-4 text-foreground-600 text-xs md:text-sm">
-              Sin costo · Solo para candidatos serios
-            </p>
+  Videollamada inicial sin costo · Cupos limitados
+</p>
           </div>
         </div>
       </div>

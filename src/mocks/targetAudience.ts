@@ -1,14 +1,14 @@
 export const targetAudienceData = {
   yes: [
-    "Estás cansado de probar métodos que no podés sostener.",
-    "Querés un plan adaptado a tu objetivo, tu rutina y tu estilo de vida.",
-    "Estás dispuesto a comprometerte con el proceso y seguir una estrategia clara.",
-    "Buscás un acompañamiento real y personalizado.",
+    "Tenés poco tiempo y necesitás un entrenamiento adaptado a tu rutina.",
+    "Querés mejorar tu físico sin depender de planes genéricos.",
+    "Buscás integrar entrenamiento y alimentación en una misma estrategia.",
+    "Valorás el acompañamiento profesional y estás dispuesto a comprometerte con el proceso.",
   ],
   no: [
-    "Buscás soluciones rápidas o resultados mágicos.",
-    "No estás dispuesto a seguir un plan de entrenamiento y alimentación de forma consistente.",
-    "No podés comprometerte con el seguimiento semanal del programa.",
-    "Esperás resultados sin constancia ni compromiso.",
+    "Buscás soluciones rápidas o resultados sin esfuerzo.",
+    "No estás dispuesto a incorporar hábitos de entrenamiento y alimentación.",
+    "Preferís seguir rutinas genéricas sin supervisión profesional.",
+    "No podés comprometerte con un proceso de 90 días.",
   ],
 };

@@ -1,14 +1,6 @@
 export const testimonialsData = [
   {
     id: 1,
-    initials: "FB",
-    name: "Franco B.",
-    age: 34,
-    rating: 5,
-    text: "Durante años entrené sin resultados porque hacía todo por mi cuenta. En ELITE 90 tuve un plan claro y alguien que me corrigiera semana a semana. Bajé 11 kg y, por primera vez, pude mantenerlos.",
-  },
-  {
-    id: 2,
     initials: "GR",
     name: "Gabriela R.",
     age: 29,
@@ -16,7 +8,7 @@ export const testimonialsData = [
     text: "Lo que más me sorprendió fue lo fácil que fue seguir el plan. Se adaptó a mi rutina desde el primer día y, por primera vez, logré ser constante de verdad.",
   },
   {
-    id: 3,
+    id: 2,
     initials: "FR",
     name: "Facundo R.",
     age: 41,
@@ -24,7 +16,7 @@ export const testimonialsData = [
     text: "Pensé que después de los 40 ya era tarde para cambiar mi físico. Hoy tengo más energía, más confianza y el mejor físico que recuerdo haber tenido.",
   },
   {
-    id: 4,
+    id: 3,
     initials: "LC",
     name: "Lucía C.",
     age: 44,
@@ -32,15 +24,7 @@ export const testimonialsData = [
     text: "Pensaba que no tenía tiempo para entrenar. Pero el plan se adaptó a mi rutina desde el primer día y en solo 12 semanas bajé 8 kg sin volverme loca con horarios ni restricciones.",
   },
   {
-    id: 5,
-    initials: "JM",
-    name: "Javier M.",
-    age: 38,
-    rating: 5,
-    text: "La diferencia no fue el entrenamiento ni la alimentación. Fue el seguimiento. Saber que cada semana revisábamos con Martín mi progreso, hizo que por primera vez mantuviera la constancia y consiguiera resultados reales.",
-  },
-  {
-    id: 6,
+    id: 4,
     initials: "AN",
     name: "Andrés N.",
     age: 52,

@@ -21,9 +21,12 @@ export default function HeroSection() {
     return () => observer.disconnect();
   }, []);
 
-  const openCalendly = () => {
-    window.open("https://calendly.com/msfitnessamonta/callprivada", "_blank", "noopener,noreferrer");
-  };
+  const scrollToVideo = () => {
+  document.getElementById("video")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
 
   return (
     <section
@@ -81,56 +84,73 @@ export default function HeroSection() {
           </div>
 
           {/* Subtitle */}
-          <div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-300 mt-6 md:mt-8">
-            <p className="text-foreground-300 text-base md:text-xl lg:text-2xl max-w-2xl mx-auto leading-relaxed">
-              Convertí tus hábitos en resultados.
-              <br />
-              Con un sistema simple y efectivo en{" "}
-              <span className="text-foreground-50 font-semibold">90 días</span>.
-            </p>
-          </div>
+<div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-300 mt-6 md:mt-8">
+  <p className="text-foreground-300 text-base md:text-xl lg:text-2xl max-w-2xl mx-auto leading-relaxed">
+    <span className="text-foreground-50 font-semibold">
+      Transformá tu físico en 90 días.
+    </span>
+    <br />
+    Con entrenamiento personalizado, nutrición profesional y un
+    acompañamiento adaptado a tu vida.
+  </p>
+</div>
 
-          {/* Trust badges */}
-          <div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-400 mt-8 md:mt-10">
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
-              {[
-                { icon: "ri-medal-line", label: "Resultados", sub: "Reales" },
-                { icon: "ri-shield-check-line", label: "Método", sub: "Probado" },
-                { icon: "ri-user-star-line", label: "Acompañamiento", sub: "Total" },
-              ].map((badge) => (
-                <div
-                  key={badge.label}
-                  className="flex items-center gap-2.5 text-foreground-400"
-                >
-                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-primary-500/10 border border-primary-500/20 flex items-center justify-center">
-                    <i className={`${badge.icon} text-primary-400 text-sm md:text-base`} />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-foreground-50 text-xs md:text-sm font-semibold uppercase tracking-wide">
-                      {badge.label}
-                    </div>
-                    <div className="text-foreground-500 text-[10px] md:text-xs uppercase tracking-wide">
-                      {badge.sub}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+         {/* Trust badges */}
+<div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-400 mt-8 md:mt-10">
+  <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
+    {[
+      {
+  icon: "ri-run-line",
+  label: "Entrenamiento",
+  sub: "Personalizado",
+},
+      {
+        icon: "ri-restaurant-line",
+        label: "Nutrición",
+        sub: "Profesional",
+      },
+      {
+        icon: "ri-line-chart-line",
+        label: "Seguimiento",
+        sub: "Continuo",
+      },
+    ].map((badge) => (
+      <div
+        key={badge.label}
+        className="flex items-center gap-2.5 text-foreground-400"
+      >
+        <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-primary-500/10 border border-primary-500/20 flex items-center justify-center">
+          <i
+            className={`${badge.icon} text-primary-400 text-sm md:text-base`}
+          />
+        </div>
+        <div className="text-left">
+          <div className="text-foreground-50 text-xs md:text-sm font-semibold uppercase tracking-wide">
+            {badge.label}
           </div>
+          <div className="text-foreground-500 text-[10px] md:text-xs uppercase tracking-wide">
+            {badge.sub}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
           {/* CTA Button */}
-          <div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-500 mt-8 md:mt-10">
-            <button
-              onClick={openCalendly}
-              className="group inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-background-50 px-8 py-4 rounded-full text-sm md:text-base font-semibold tracking-wide uppercase transition-all duration-300 hover:scale-105 cursor-pointer whitespace-nowrap"
-            >
-              Agendar Llamada
-              <i className="ri-arrow-right-line text-lg group-hover:translate-x-1 transition-transform" />
-            </button>
-            <p className="mt-3 text-foreground-600 text-xs md:text-sm">
-              Sin costo · Solo para candidatos serios
-            </p>
-          </div>
+<div className="reveal opacity-0 translate-y-4 transition-all duration-700 delay-500 mt-8 md:mt-10">
+  <button
+    onClick={scrollToVideo}
+    className="group inline-flex items-center gap-3 bg-primary-500 hover:bg-primary-600 text-background-50 px-8 py-4 rounded-full text-sm md:text-base font-semibold tracking-wide uppercase transition-all duration-300 hover:scale-105 cursor-pointer"
+  >
+    Descubrí cómo funciona
+    <i className="ri-arrow-down-line text-lg group-hover:translate-y-1 transition-transform" />
+  </button>
+
+  <p className="mt-3 text-foreground-600 text-xs md:text-sm">
+    Conocé ELITE 90 en nuestro video de presentación
+  </p>
+</div>
         </div>
       </div>
 

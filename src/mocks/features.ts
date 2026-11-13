@@ -2,29 +2,29 @@ export const featuresData = [
   {
     id: 1,
     icon: "ri-user-settings-line",
-    title: "PROGRAMA 100% PERSONALIZADO",
+    title: "ENTRENAMIENTO PERSONALIZADO",
     description:
-      "Entrenamiento y alimentación diseñados según tu objetivo, tu rutina y tu nivel de experiencia. Nada de planes genéricos: cada estrategia se adapta a tu realidad para que puedas sostenerla y obtener resultados.",
+      "Un plan de entrenamiento diseñado según tus objetivos, experiencia y disponibilidad. Cada semana analizo tu progreso y realizo los ajustes necesarios para que sigas avanzando.",
   },
   {
     id: 2,
-    icon: "ri-calendar-check-line",
-    title: "Seguimiento Semanal",
+    icon: "ri-restaurant-line",
+    title: "NUTRICIÓN PROFESIONAL",
     description:
-      "Cada semana analizo tu progreso y realizo los ajustes necesarios para mantenerte avanzando hacia tu objetivo. No seguís un plan fijo: el plan evoluciona con vos.",
+      "Una licenciada en Nutrición diseña tu planificación alimentaria según tus objetivos, gustos y estilo de vida, con seguimientos quincenales para evaluar tu evolución.",
   },
   {
     id: 3,
     icon: "ri-message-3-line",
-    title: "Acompañamiento Real",
+    title: "ACOMPAÑAMIENTO CONTINUO",
     description:
-      "No recorrés este proceso solo. Durante todo el programa contás con mi acompañamiento para resolver dudas, recibir orientación y mantener el foco en tu objetivo.",
+      "Durante los 90 días contás con el acompañamiento de tu entrenador y nutricionista. Trabajamos de manera coordinada para que entrenamiento y alimentación formen parte de una misma estrategia.",
   },
   {
     id: 4,
     icon: "ri-bar-chart-grouped-line",
-    title: "Resultados Medibles",
+    title: "RESULTADOS MEDIBLES",
     description:
-      "Analizo las métricas clave de tu evolución para tomar decisiones basadas en datos, no en suposiciones. Cada ajuste del plan responde a tu progreso real.",
+      "Evaluamos tu evolución mediante registros de entrenamiento, indicadores de progreso y cambios físicos. Cada ajuste responde a tu evolución real, no a un plan genérico.",
   },
 ];

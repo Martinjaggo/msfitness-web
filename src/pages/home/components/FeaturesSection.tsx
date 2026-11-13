@@ -41,9 +41,9 @@ export default function FeaturesSection() {
               <div className="h-px w-12 md:w-20 bg-background-700" />
             </div>
             <p className="text-foreground-500 text-sm md:text-base max-w-xl mx-auto">
-              Un sistema 100% personalizado que se adapta a vos, a tu tiempo y a
-              tu vida.
-            </p>
+  Entrenamiento y nutrición profesional integrados en un programa de
+  90 días, diseñado para adaptarse a tu estilo de vida.
+</p>
           </div>
 
           {/* Features Grid */}
