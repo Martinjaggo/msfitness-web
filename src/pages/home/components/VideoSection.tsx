@@ -129,7 +129,7 @@ export default function VideoSection() {
                 <div className="absolute inset-0 bg-black">
 
                   <iframe
-                    src="https://www.youtube.com/embed/UIckZNC5r_0?autoplay=1&rel=0"
+                    src="https://www.youtube.com/embed/94SQYkjmqUQ?autoplay=1&rel=0"
                     title="Video ELITE 90"
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
