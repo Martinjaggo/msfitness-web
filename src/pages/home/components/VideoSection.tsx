@@ -1,23 +1,69 @@
 import { useEffect, useRef, useState } from "react";
 import thumbnail from "../../../assets/vsl-thumbnail.png";
 
+const VIDEO_ID = "94SQYkjmqUQ";
+
+type YouTubePlayer = {
+  getCurrentTime: () => number;
+  getDuration: () => number;
+  destroy: () => void;
+};
+
+type YouTubeAPI = {
+  Player: new (
+    element: HTMLElement,
+    options: {
+      videoId: string;
+      playerVars: Record<string, number>;
+      events: {
+        onReady: () => void;
+        onStateChange: (event: { data: number }) => void;
+      };
+    }
+  ) => YouTubePlayer;
+  PlayerState: {
+    PLAYING: number;
+    ENDED: number;
+  };
+};
+
+declare global {
+  interface Window {
+    YT?: YouTubeAPI;
+    onYouTubeIframeAPIReady?: () => void;
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+function trackMetaEvent(
+  eventName: string,
+  data: Record<string, string>
+) {
+  if (typeof window.fbq === "function") {
+    window.fbq("trackCustom", eventName, data);
+  }
+}
+
 export default function VideoSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const playerContainerRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<YouTubePlayer | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const trackedMilestones = useRef<Set<number>>(new Set());
+
   const [isPlaying, setIsPlaying] = useState(false);
 
- const openCalendly = () => {
-  if (typeof (window as any).fbq === "function") {
-    (window as any).fbq("trackCustom", "Schedule_Click", {
+  const openCalendly = () => {
+    trackMetaEvent("Schedule_Click", {
       programa: "ELITE_90"
     });
-  }
 
-  window.open(
-    "https://calendly.com/msfitnessamonta/callprivada",
-    "_blank",
-    "noopener,noreferrer"
-  );
-};
+    window.open(
+      "https://calendly.com/msfitnessamonta/callprivada",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,6 +82,145 @@ export default function VideoSection() {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!isPlaying || !playerContainerRef.current) return;
+
+    let cancelled = false;
+
+    const stopTracking = () => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+
+    const checkProgress = () => {
+      const player = playerRef.current;
+      if (!player) return;
+
+      const duration = player.getDuration();
+      const currentTime = player.getCurrentTime();
+
+      if (
+        !Number.isFinite(duration) ||
+        !Number.isFinite(currentTime) ||
+        duration <= 0
+      ) {
+        return;
+      }
+
+      const percentage = (currentTime / duration) * 100;
+
+      [25, 50, 75].forEach((milestone) => {
+        if (
+          percentage >= milestone &&
+          !trackedMilestones.current.has(milestone)
+        ) {
+          trackedMilestones.current.add(milestone);
+
+          trackMetaEvent(`VSL_${milestone}`, {
+            video: "ELITE_90"
+          });
+        }
+      });
+    };
+
+    const initializePlayer = () => {
+      if (
+        cancelled ||
+        !window.YT?.Player ||
+        !playerContainerRef.current ||
+        playerRef.current
+      ) {
+        return;
+      }
+
+      playerRef.current = new window.YT.Player(
+        playerContainerRef.current,
+        {
+          videoId: VIDEO_ID,
+          playerVars: {
+            autoplay: 1,
+            rel: 0,
+            playsinline: 1
+          },
+          events: {
+            onReady: () => {},
+            onStateChange: (event) => {
+              if (event.data === window.YT?.PlayerState.PLAYING) {
+                stopTracking();
+
+                checkProgress();
+
+                intervalRef.current = setInterval(
+                  checkProgress,
+                  1000
+                );
+              } else {
+                checkProgress();
+                stopTracking();
+
+                if (
+                  event.data === window.YT?.PlayerState.ENDED &&
+                  !trackedMilestones.current.has(100)
+                ) {
+                  trackedMilestones.current.add(100);
+
+                  trackMetaEvent("VSL_100", {
+                    video: "ELITE_90"
+                  });
+                }
+              }
+            }
+          }
+        }
+      );
+    };
+
+    if (window.YT?.Player) {
+      initializePlayer();
+    } else {
+      const previousCallback = window.onYouTubeIframeAPIReady;
+
+      window.onYouTubeIframeAPIReady = () => {
+        previousCallback?.();
+        initializePlayer();
+      };
+
+      if (
+        !document.querySelector(
+          'script[src="https://www.youtube.com/iframe_api"]'
+        )
+      ) {
+        const script = document.createElement("script");
+        script.src = "https://www.youtube.com/iframe_api";
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    }
+
+    return () => {
+      cancelled = true;
+      stopTracking();
+
+      if (playerRef.current) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
+  }, [isPlaying]);
+
+  const handlePlay = () => {
+    if (isPlaying) return;
+
+    trackedMilestones.current.clear();
+    setIsPlaying(true);
+
+    trackMetaEvent("VSL_Play", {
+      video: "ELITE_90"
+    });
+  };
 
   return (
     <section
@@ -73,17 +258,7 @@ export default function VideoSection() {
 
             <div
               className="relative aspect-video bg-gray-950 rounded-2xl md:rounded-3xl border border-gray-200 overflow-hidden group cursor-pointer shadow-2xl"
-              onClick={() => {
-  if (!isPlaying) {
-    setIsPlaying(true);
-
-    if (typeof (window as any).fbq === "function") {
-      (window as any).fbq("trackCustom", "VSL_Play", {
-        video: "ELITE_90"
-      });
-    }
-  }
-}}
+              onClick={handlePlay}
             >
 
               {!isPlaying ? (
@@ -95,26 +270,26 @@ export default function VideoSection() {
                   />
 
                   {/* Play Button con resplandor azul */}
-<div className="absolute inset-0 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center">
 
-  <div className="relative flex items-center justify-center">
+                    <div className="relative flex items-center justify-center">
 
-    {/* Halo luminoso animado */}
-    <div className="absolute w-24 h-24 md:w-28 md:h-28 rounded-full bg-blue-500/40 blur-xl animate-pulse pointer-events-none" />
+                      {/* Halo luminoso animado */}
+                      <div className="absolute w-24 h-24 md:w-28 md:h-28 rounded-full bg-blue-500/40 blur-xl animate-pulse pointer-events-none" />
 
-    {/* Resplandor exterior */}
-    <div className="absolute w-20 h-20 md:w-24 md:h-24 rounded-full shadow-[0_0_35px_12px_rgba(59,130,246,0.45)] pointer-events-none" />
+                      {/* Resplandor exterior */}
+                      <div className="absolute w-20 h-20 md:w-24 md:h-24 rounded-full shadow-[0_0_35px_12px_rgba(59,130,246,0.45)] pointer-events-none" />
 
-    {/* Botón Play */}
-    <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary-500 border-4 border-white/30 flex items-center justify-center shadow-xl group-hover:bg-primary-600 group-hover:scale-110 transition-all duration-300">
+                      {/* Botón Play */}
+                      <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary-500 border-4 border-white/30 flex items-center justify-center shadow-xl group-hover:bg-primary-600 group-hover:scale-110 transition-all duration-300">
 
-      <i className="ri-play-fill text-white text-3xl md:text-4xl ml-1" />
+                        <i className="ri-play-fill text-white text-3xl md:text-4xl ml-1" />
 
-    </div>
+                      </div>
 
-  </div>
+                    </div>
 
-</div>
+                  </div>
 
                   {/* Video Info */}
                   <div className="absolute bottom-4 left-4 right-4">
@@ -141,15 +316,10 @@ export default function VideoSection() {
                 </>
               ) : (
                 <div className="absolute inset-0 bg-black">
-
-                  <iframe
-                    src="https://www.youtube.com/embed/94SQYkjmqUQ?autoplay=1&rel=0"
-                    title="Video ELITE 90"
+                  <div
+                    ref={playerContainerRef}
                     className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
                   />
-
                 </div>
               )}
 
