@@ -68,8 +68,16 @@ export default function VideoSection() {
             <div
               className="relative aspect-video bg-gray-950 rounded-2xl md:rounded-3xl border border-gray-200 overflow-hidden group cursor-pointer shadow-2xl"
               onClick={() => {
-                if (!isPlaying) setIsPlaying(true);
-              }}
+  if (!isPlaying) {
+    setIsPlaying(true);
+
+    if (typeof (window as any).fbq === "function") {
+      (window as any).fbq("trackCustom", "VSL_Play", {
+        video: "ELITE_90"
+      });
+    }
+  }
+}}
             >
 
               {!isPlaying ? (
