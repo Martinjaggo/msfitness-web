@@ -58,20 +58,12 @@ export default function VideoSection() {
     programa: "ELITE_90"
   });
 
-  const calendly = (window as any).Calendly;
-
-  if (calendly?.initPopupWidget) {
-    calendly.initPopupWidget({
-      url: "https://calendly.com/msfitnessamonta/callprivada"
-    });
-  } else {
-    window.open(
-      "https://calendly.com/msfitnessamonta/callprivada",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  }
-};
+ window.open(
+  "https://calendly.com/msfitnessamonta/callprivada",
+  "_blank",
+  "noopener,noreferrer"
+);
+    };
 useEffect(() => {
   const handleCalendlyEvent = (event: MessageEvent) => {
     if (
