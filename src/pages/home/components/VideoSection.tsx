@@ -5,13 +5,19 @@ export default function VideoSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const openCalendly = () => {
-    window.open(
-      "https://calendly.com/msfitnessamonta/callprivada",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
+ const openCalendly = () => {
+  if (typeof (window as any).fbq === "function") {
+    (window as any).fbq("trackCustom", "Schedule_Click", {
+      programa: "ELITE_90"
+    });
+  }
+
+  window.open(
+    "https://calendly.com/msfitnessamonta/callprivada",
+    "_blank",
+    "noopener,noreferrer"
+  );
+};
 
   useEffect(() => {
     const observer = new IntersectionObserver(
