@@ -54,17 +54,54 @@ export default function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const openCalendly = () => {
-    trackMetaEvent("Schedule_Click", {
-      programa: "ELITE_90"
-    });
+  trackMetaEvent("Schedule_Click", {
+    programa: "ELITE_90"
+  });
 
+  const calendly = (window as any).Calendly;
+
+  if (calendly?.initPopupWidget) {
+    calendly.initPopupWidget({
+      url: "https://calendly.com/msfitnessamonta/callprivada"
+    });
+  } else {
     window.open(
       "https://calendly.com/msfitnessamonta/callprivada",
       "_blank",
       "noopener,noreferrer"
     );
+  }
+};
+useEffect(() => {
+  const handleCalendlyEvent = (event: MessageEvent) => {
+    if (
+      event.origin === "https://calendly.com" &&
+      event.data?.event === "calendly.event_scheduled"
+    ) {
+      trackMetaEvent("Schedule_Complete", {
+        programa: "ELITE_90"
+      });
+    }
   };
 
+  window.addEventListener("message", handleCalendlyEvent);
+
+  return () => {
+    window.removeEventListener("message", handleCalendlyEvent);
+  };
+}, []);
+
+  useEffect(() => {
+  const script = document.createElement("script");
+  script.src = "https://assets.calendly.com/assets/external/widget.js";
+  script.async = true;
+
+  document.body.appendChild(script);
+
+  return () => {
+    document.body.removeChild(script);
+  };
+}, []);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
